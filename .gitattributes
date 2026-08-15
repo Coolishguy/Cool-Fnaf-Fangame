@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Stop GitHub from misidentifying Wolfram Language files
+*.wl linguist-vendored
+*.wlt linguist-vendored
