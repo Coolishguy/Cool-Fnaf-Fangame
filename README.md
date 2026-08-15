@@ -16,3 +16,4 @@ Move
 Your
 Camera
 Ok bye
+(P.S: Wolfram is still detected)
