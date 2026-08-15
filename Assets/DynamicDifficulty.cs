@@ -79,7 +79,8 @@ public class DynamicDifficulty : MonoBehaviour
         }
 
         nightEnded = true;
-        Time.timeScale = 0f;
+        timerRunning = false;
+        enabled = false;
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
