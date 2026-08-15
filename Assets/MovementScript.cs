@@ -202,6 +202,7 @@ public class MovementScript : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            Debug.Log("Security monitor opened. Player movement frozen.");
         }
         else
         {
