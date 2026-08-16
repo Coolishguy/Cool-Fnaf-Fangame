@@ -5,22 +5,46 @@ public class Atmosphere : MonoBehaviour
     [Range(0f, 100f)]
     public float visibilityPercent = 35f;
 
-    private void Awake()
+    [SerializeField] private bool useFog = false;
+
+    private void Start()
+    {
+        ApplyDarkAtmosphere();
+    }
+
+    private void Update()
+    {
+        ApplyDarkAtmosphere();
+    }
+
+    private void OnValidate()
     {
         ApplyDarkAtmosphere();
     }
 
     private void ApplyDarkAtmosphere()
     {
-        float brightness = Mathf.Clamp01(visibilityPercent / 100f);
+        float visibility = Mathf.Clamp01(visibilityPercent / 100f);
+        float darkness = 1f - visibility;
 
-        RenderSettings.fog = true;
-        RenderSettings.fogMode = FogMode.ExponentialSquared;
-        RenderSettings.fogDensity = Mathf.Lerp(0.08f, 0.45f, 1f - brightness);
-        RenderSettings.fogColor = new Color(0.04f, 0.05f, 0.07f);
-        RenderSettings.ambientLight = new Color(brightness, brightness, brightness + 0.05f);
+        RenderSettings.fog = useFog;
+        if (useFog)
+        {
+            RenderSettings.fogMode = FogMode.ExponentialSquared;
+            RenderSettings.fogDensity = Mathf.Lerp(0.01f, 0.18f, darkness);
+            RenderSettings.fogColor = new Color(0.03f, 0.04f, 0.06f);
+        }
 
-        if (Camera.main != null)
-            Camera.main.backgroundColor = RenderSettings.fogColor;
+        RenderSettings.ambientLight = new Color(
+            visibility * 0.8f,
+            visibility * 0.8f,
+            Mathf.Clamp01((visibility * 0.8f) + 0.05f)
+        );
+
+        Camera mainCamera = Camera.main;
+        if (mainCamera != null)
+        {
+            mainCamera.clearFlags = CameraClearFlags.Skybox;
+        }
     }
 }
