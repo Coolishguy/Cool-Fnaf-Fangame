@@ -7,8 +7,9 @@ public class Flashlight : MonoBehaviour
     public KeyCode toggleKey = KeyCode.F;
 
     [Header("Light Settings")]
-    public float intensity = 8f;
+    public float intensity = 500f;
     public float range = 20f;
+    public float spotAngle = 45f;
     public bool startOn = false;
 
     private Light flashlight;
@@ -17,11 +18,10 @@ public class Flashlight : MonoBehaviour
     {
         flashlight = GetComponent<Light>();
 
-        flashlight.type = LightType.Point;
+        flashlight.type = LightType.Spot;
         flashlight.range = range;
         flashlight.intensity = intensity;
-        flashlight.shadows = LightShadows.Soft;
-        flashlight.renderMode = LightRenderMode.Auto;
+        flashlight.spotAngle = spotAngle;
         flashlight.enabled = startOn;
     }
 

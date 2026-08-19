@@ -52,6 +52,12 @@ namespace TMPro.Examples
 
         void Awake()
         {
+            // --- CODE REVIEW SUGGESTION ---
+            // This example script is likely conflicting with your game's input handling.
+            // It is recommended to remove this component from your camera object in the scene.
+            Debug.LogWarning($"The 'CameraController' script on GameObject '{gameObject.name}' is an example script and may interfere with your game's controls. Please remove it.", this);
+            enabled = false; // Disable this script to prevent input conflicts.
+
             if (QualitySettings.vSyncCount > 0)
                 Application.targetFrameRate = 60;
             else
